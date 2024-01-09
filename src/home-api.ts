@@ -1,6 +1,10 @@
-import "./set-public-path";
+export const fetchProducts = async () => {
+  try {
+    const response = await fetch("https://dummyjson.com/products");
+    const products = await response.json();
 
-// Anything exported from this file is importable by other in-browser modules.
-export function publicApiFunction() {
-  console.log("[publicApiFunction]");
-}
+    return products;
+  } catch (error) {
+    throw error;
+  }
+};
