@@ -1,19 +1,26 @@
 import { savePersistData, clearPersistData, getPersistData } from "./persist-data";
 
-const getUser = () => Promise.resolve({
-  id: '1',
-  name: 'John',
-  token: 'd83jD63UdZ6RS6f70D0'
-});
-
 export const login = async () => {
-  const userData = await getUser();
-  savePersistData('userData', userData);
+  try {
+    const response = await fetch("https://dummyjson.com/auth/login", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: 'kminchelle',
+        password: '0lelplR'
+      })
+    });
+    const userData = await response.json();
 
-  const event = new Event('app-chage:user-login')
-  window.dispatchEvent(event);
+    savePersistData('userData', userData);
 
-  return userData;
+    const event = new Event('app-chage:user-login')
+    window.dispatchEvent(event);
+
+    return userData;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export const logout = () => {
