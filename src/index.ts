@@ -1,4 +1,4 @@
-import { savePersistData, clearPersistData, getPersistData } from "./persist-data";
+import { savePersistData, clearPersistData, getPersistData } from "./persist";
 
 export const login = async () => {
   try {
@@ -56,7 +56,7 @@ export const fetchButchProducts = async ({ limit = 10 }) => {
   }
 };
 
-export const fetchProduct = async ({ id }) => {
+export const fetchProduct = async ({ id = '1' }) => {
   if (id === undefined || id === null) {
     return null
   }
